@@ -1,0 +1,50 @@
+STEFAN Alexandru 315CB
+Punctaj local: 120
+Cerinta 1:
+        Dupa citirea numarului de obiective, respectiv drumuri, se citesc din fisierul
+    de input si drumurile. In timp ce se citesc drumurile se alcatuieste vectorul "nume_obiective",
+    in care fiecare element poarta numele unui nod. Ma folosesc de acest vector pentru a codifica
+    nodurile. Astfel, fiecare nume al nodului va avea un cod unic, de care ne vom folosi in 
+    structura listei de adiancenta, deoarece in lista am int-uri si este mai usor de lucrat 
+    cu ele. Toate nodurile vor avea coduri de la 1 la nr de noduri.
+    Acest vector cu numele il construiesc in felul urmator: de fiecare data cand citesc,
+    atat sursa cat destinatia verific pentru fiecare daca este deja in vectorul de nume
+    daca este, sarim peste si nu mai modificam nimic in vectorul de nume, daca nu este 
+    adaugam nodul respectiv pe prima pozitie libera din vector.
+    In timp ce construiesc vectorul de nume, alcatuiesc si graful cu o functie ce adauga
+    muchia respectiva cu costul specificat in graf, dar apelez functia cu muchia sursa-dest,
+    cat si dest-sursa, deoarece este un graf bidirectional
+        In continuare, fac un vector in care voi retine pe fiecare pozitie costul minim al
+    unei componente conexe. Ma folosesc de vector pentru a il sorta ulterior ca sa afisez
+    costurile in ordine crescatoare in fisierul de output.
+        Declar un vector de frecventa de dimensiune "nr_noduri", ce il initializez cu 0
+    adica acele noduri nu au fost vizitate.
+        Functia ce imi numara componentele conexe, este defapt o functie de parcurgere
+    in adancime a grafului, incepand de la un nod. Astfel, atunci cand pornesc de la un nod
+    acea functie imi va parcurge doar componenta conexa din care face parte acel nod. Functia
+    returneaza 1, daca a reusit sa parcuga acea componenta, si 0 altfel. De mentionat faptul
+    ca, functia parcurge doar nodurile nevizitate, iar de fiecare data cand trece printr-un
+    nod imi marcheaza acel nod ca vizitat. Functia va fi apelata pentru toate nodurile, dar 
+    datorita vectorului de frecventa daca incercam sa parcurgem o componenta conexa ce a mai fost
+    parcursa inainte, a doua oara sau a treia, etc. nu va mai fi parcursa. Acest lucru este important
+    deoarece de fiecare data cand functia returneaza 1 (o sa returneze 1 o singura data pentru
+    fiecare componenta conexa) vom aplica agloritmul Prim pe acea componenta conexa.
+        In final, ordonam cu qsort vectorul de costuri minime din componentele conexe si afisam,
+        atat numarul componentelor cat si vectorul ordonat
+Cerinta 2:
+        La aceasta cerinta prima parte este aproape identca cu cea de la cerinta 1, doar
+    ca de data asta avem o structura "puncte", in care retinem atat numele cat si adancimea
+    fiecarui punct. Pentru rubrica de nume din structura facem exact ca la prima cerinta, doar
+    ca ma asigur ca insula este nodul 1, iar corabia nodul 2 pentru a imi usura mai tarziu munca.
+        Dupa citirea numelor nodurilor, citim si adancimile nodurilor, pe care le introducem in 
+    rubrica de adancime a structurii. De asemenea, la final se citeste si greutatea corabiei
+        In continuare, am declarat si initializat un vector ce ma va ajuta la algoritmul Dijkstras
+    ce are ca rubrici, distanta ce reprezinta costul minim de la sursa pana la nodul respectiv,
+    prev, ce reprezinta nodul din de dinaintea nodului curent din drumul cel mai eficient si 
+    scor, ce reprezinta scorul minim al celui mai eficient drum.
+        Aplicam Dijkstras cu sursa de la corabie, daca nu se gaseste nicun drum pana la insula,
+    se afiseaza mesajul dorit si se incheie programul.
+        Dupa, aplicam din nou Dijkstras, dar de la insula la corabie, daca nu se gaseste drum,
+    se afiseaza mesajul dorit si se incheie porgramul.
+        Dupa aceea reconstruim drumul de la Insula la corabie si il afisam, iar in final calculam
+    numarul de drumuri necesare pentru a transporta intreaga comoara si il afisam.
